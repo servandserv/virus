@@ -60,7 +60,7 @@
                     virus = virus.deploy(virus, virions);
                     virus.interval = setInterval(function () {
                         virus.infect();
-                    }, 100);
+                    }, virus.intervalValue);
                 });
                 //We added a trigger on the medkits bar and number so they either go down or up
                 d.addEventListener("MedpacksUpdated", function(e) {

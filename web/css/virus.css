@@ -37,19 +37,20 @@ body {
     margin: 0;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
+    /*align-content: flex-start;*/
 }
 #menu {
     z-index: 2;
     flex: 1 100%;
-    max-height: 3rem;
-    /*height: 3.5rem;*/
+    height: 3.25rem;
     background: black;
     color: #ff4040;
     text-align: right;
     font-size: 1.3rem;
 }
 #menu ul {
-    margin: .5rem 0;
+    margin: .75rem 0 0 0;
     padding: 0;
     list-style: none;
 }
@@ -64,7 +65,7 @@ body {
 #menu span {
     display: block;
     position: absolute;
-    margin: .5rem 1rem;
+    margin: .75rem 1rem 0 1rem;
     font-weight: bold;
 }
 
@@ -74,6 +75,8 @@ body {
 
 #map {
     flex: 80%;
+    max-width: 1024px;
+    max-height: 700px;
     background-image: url("../images/world_map.gif");
     background-size: 100% 100%;
 }
@@ -107,7 +110,7 @@ body {
 
 #map table td[alt='0'] {
     background: black;
-    opacity: .2;
+    opacity: .35;
     color: white;
 }
 #test table td[alt='0'] {
@@ -116,7 +119,9 @@ body {
 
 #hotbar {
     flex: 20%;
+    max-width: 256px;
     height: 92.5%;
+    max-height: 700px;
     text-align: center;
 }
 
@@ -180,7 +185,7 @@ body {
     position: absolute;
     bottom: 1rem;
     left: 1rem;
-    color: #ff4040;
+    color: white;
     font-size: 2rem;
     font-weight: 700;
 }
@@ -211,7 +216,7 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
-    opacity: .7;
+    opacity: .85;
     background: black;
     display: none;
 
@@ -278,8 +283,13 @@ body {
     display: flex;
 }
 .splash h1 + div > a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5rem;
+
     flex: 48%;
+
     background: white;
     border-radius: .5rem;
     padding: 1rem 1rem;

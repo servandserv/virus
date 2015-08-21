@@ -151,7 +151,7 @@
         //if the dose of the infected is more than the setup amount the we stop the game
         if (virus.MAXINFECTED < virus.infected && virus.interval) {
             clearInterval(virus.interval);
-            var evt = new CustomEvent("GameFinished", {detail: "<div>Game Over!<br/>World survived " + virus.age + " days.</div>"});
+            var evt = new CustomEvent("GameFinished", {detail: "<div>Game Over!<br/>World survived " + virus.age + " days.<br/> More then 50% territory infected.</div>"});
             d.dispatchEvent(evt);
         }
     };

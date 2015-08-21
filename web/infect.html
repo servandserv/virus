@@ -117,7 +117,7 @@
                             if(history[i] == virus.virions.toString()) {
                                 clearInterval(virus.interval);
                                 var evt = new CustomEvent("GameFinished", {
-                                    detail: "<div>Game Over!<br/>You only infected "+parseInt(virus.infected * 100) / 100+"% of the world.</div>"
+                                    detail: "<div>Game Over!<br/>You only infected "+parseInt(virus.infected * 100) / 100+"% of the world in "+virus.age+" days.</div>"
                                 });
                                 d.dispatchEvent(evt);
                                 return;
@@ -130,7 +130,7 @@
                             history.push(virus.virions.toString());
                         }
                         virus.infect();
-                    }, 100);
+                    }, virus.intervalValue);
                 });
                 
                 d.addEventListener("VirusCreated", function(e) {
