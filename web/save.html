@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The VIRUS!!</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/virus.css" type="text/css" />
+    </head>
+    <body>
+        <div id='menu'>
+            <span>Destroy the virus!</span>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="conway.html">Conway's Game</a></li>
+            </ul>
+        </div>
+        <div id="map">
+            <div id="counter-bar">Days: 0</div>
+            <table title="field" id="virus"></table>
+        </div>
+        <div id="hotbar">
+            <div>
+                <button id="start">Deploy the virus</button>
+                <div id="medpacks">
+                    <div id="medpacks-bar"></div>
+                    Medpacks - X <span id="medpacks-count">10</span>
+                </div>
+                <div id="infected-bar">0%</div>
+                <p>Infected</p>
+            </div>
+        </div>
+        <div id="message"></div>
+        <script type="text/javascript">
+            
+            window.virus = {};
+            
+            ;(function(d, virus){
+                /*
+                 * This code is based on Conway's Game of Life
+                 * In this game there are two modes one to save the world and the other to control the virus
+                 * Let's go
+                 */
+                //views controllers
+                //When you press the button "Deploy the Virus" a virus starts spreading around the map
+                d.getElementById("start").addEventListener("click", function() {
+                    if (virus.interval) {
+                        clearInterval(virus.interval);
+                    }
+                    //The table for the way you see the virus on the screen
+                    var map = d.getElementById("map");
+                    virus.init(map, {
+                        //This is the amount of day over the deployment of a new virus
+                        NEWDEPLOYMENT: 50,
+                        //This is how much of the world is infected in % 
+                        MAXINFECTED: 50,
+                        //Maximum number of user medpacks
+                        MAXMEDPACKS: 10
+                    });
+                    var virions = virus.selectTest();
+                    virus = virus.deploy(virus, virions);
+                    virus.interval = setInterval(function () {
+                        virus.infect();
+                    }, 100);
+                });
+                //We added a trigger on the medkits bar and number so they either go down or up
+                d.addEventListener("MedpacksUpdated", function(e) {
+                    //First we found the html elements
+                    var medpacksCount = d.getElementById("medpacks-count");
+                    var medpacksBar = d.getElementById("medpacks-bar");
+                    //WE update the medpack count and status bar
+                    medpacksCount.innerHTML = e.detail.medpacks;
+                    medpacksBar.style.width = parseInt( e.detail.medpacks / 10 * 100 ) + "%";
+                });
+                d.addEventListener("VirusCreated", function(e) {
+                    virus.renderMap(d.getElementById("virus"),e.detail,"virus", virus.killVirion );
+                });
+                d.addEventListener("VirusDeployed", function(e) {
+                    virus.renderVirus(d.getElementById("virus"),e.detail,"virus");
+                    virus.renderInfectedCounter(d.getElementById("infected-bar"), e.detail);
+                    virus.renderSurvivedDays(d.getElementById("counter-bar"),e.detail);
+                });
+                d.addEventListener("NextStrain", function(e) {
+                    virus.renderVirus(d.getElementById("virus"),e.detail,"virus");
+                    virus.renderInfectedCounter(d.getElementById("infected-bar"),e.detail);
+                    virus.renderSurvivedDays(d.getElementById("counter-bar"),e.detail);
+                });
+                d.addEventListener("GameFinished", function(e) {
+                    virus.renderMessage(d.getElementById("message"),e.detail);
+                });
+                
+            }(document, window.virus));
+            
+        </script>
+        <script type="text/javascript" src="js/conf.js">;</script>
+        <script type="text/javascript" src="js/virus.js">;</script>
+    </body>
+</html>

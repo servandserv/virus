@@ -1,0 +1,336 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 07-Aug-2015, 15:59:04
+    Author     : yan kolpakov
+*/
+html, body {
+    height: 100%;
+    font-family: Roboto;
+}
+@font-face {
+    font-family: "Roboto";
+    src: url("../font/roboto/Roboto-Thin.woff2") format("woff2"), url("../font/roboto/Roboto-Thin.woff") format("woff"), url("../font/roboto/Roboto-Thin.ttf") format("truetype");
+    font-weight: 200; }
+@font-face {
+    font-family: "Roboto";
+    src: url("../font/roboto/Roboto-Light.woff2") format("woff2"), url("../font/roboto/Roboto-Light.woff") format("woff"), url("../font/roboto/Roboto-Light.ttf") format("truetype");
+    font-weight: 300; }
+@font-face {
+    font-family: "Roboto";
+    src: url("../font/roboto/Roboto-Regular.woff2") format("woff2"), url("../font/roboto/Roboto-Regular.woff") format("woff"), url("../font/roboto/Roboto-Regular.ttf") format("truetype");
+    font-weight: 400; }
+@font-face {
+    font-family: "Roboto";
+    src: url("../font/roboto/Roboto-Medium.woff2") format("woff2"), url("../font/roboto/Roboto-Medium.woff") format("woff"), url("../font/roboto/Roboto-Medium.ttf") format("truetype");
+    font-weight: 500; }
+@font-face {
+    font-family: "Roboto";
+    src: url("../font/roboto/Roboto-Bold.woff2") format("woff2"), url("../font/roboto/Roboto-Bold.woff") format("woff"), url("../font/roboto/Roboto-Bold.ttf") format("truetype");
+    font-weight: 700; }
+body {
+    background:#ff4040;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+}
+#menu {
+    z-index: 2;
+    flex: 1 100%;
+    max-height: 3rem;
+    /*height: 3.5rem;*/
+    background: black;
+    color: #ff4040;
+    text-align: right;
+    font-size: 1.3rem;
+}
+#menu ul {
+    margin: .5rem 0;
+    padding: 0;
+    list-style: none;
+}
+#menu ul li {
+    display:inline;
+    padding: 1rem;
+}
+#menu ul li a {
+    color: #ff4040;
+    text-decoration: none;
+}
+#menu span {
+    display: block;
+    position: absolute;
+    margin: .5rem 1rem;
+    font-weight: bold;
+}
+
+#intro {
+    flex: 1 100%;
+}
+
+#map {
+    flex: 80%;
+    background-image: url("../images/world_map.gif");
+    background-size: 100% 100%;
+}
+#map table,
+#test table {
+    border:0;
+    padding:0;
+    margin:0;
+    border-spacing:1;
+    /*border-collapse: collapse;*/
+}
+#map table td,
+#test table td {
+    border:0;
+    padding:0;
+    margin:0;
+    width:8px;
+    height:8px;
+    opacity: .7;
+    font-size: 7px;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+}
+#map table td[alt='1'],
+#test table td[alt='1']{
+    background: black;
+    opacity: 1;
+    color: white;
+}
+
+#map table td[alt='0'] {
+    background: black;
+    opacity: .2;
+    color: white;
+}
+#test table td[alt='0'] {
+    background: #ffb4b4;
+}
+
+#hotbar {
+    flex: 20%;
+    height: 92.5%;
+    text-align: center;
+}
+
+#hotbar > div {
+    margin: 1rem;
+}
+
+#hotbar button {
+    width: 100%;
+    background: white;
+    border-radius: .5rem;
+    border: none;
+    padding: 2rem 1rem;
+    font-size: 1.5rem;
+    color: #ff4040;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#hotbar button + h2 {
+    color: white;
+    letter-spacing: 0.1em;
+
+}
+
+#hotbar #medpacks {
+    height: 2rem;
+    background: #ffb4b4;
+    margin: 2rem 0;
+    padding:0;
+    opacity: 1;
+    color: white;
+}
+
+#hotbar #medpacks > div {
+    background: black;
+    width: 100%;
+    height: 1rem;
+    opacity: 1;
+    height: 2rem;
+    margin-bottom: 1rem;
+}
+
+#hotbar #infected-bar {
+    line-height: 3rem;
+    text-align:center;
+    margin: 4rem 1rem 1rem 1rem;
+    padding:0;
+    opacity: 1;
+    color: white;
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+#hotbar #infected-bar + p {
+    color: white;
+}
+
+#counter-bar {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: #ff4040;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+#test {
+    margin: auto;
+    width: 152px;
+    height: 152px;
+    background: white;
+}
+
+#test table td {
+    background: #ffb4b4;
+}
+
+#ready-test {
+    border: solid 1px white;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: .5rem;
+    margin: 0 0 1rem 0;
+}
+
+#message {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    opacity: .7;
+    background: black;
+    display: none;
+
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#message > div {
+    flex: 100%;
+    align-self: center;
+
+    font-size: 2.5rem;
+    color: white;
+    font-weight: 900;
+}
+
+/*
+ * -- SPLASH STYLES --
+ * This is the blue top section that appears on the page.
+ */
+
+.splash-container {
+    background: #ff4040;
+    z-index: 1;
+    overflow: hidden;
+    /* The following styles are required for the "scroll-over" effect */
+    width: 100%;
+    height: 80%;
+    top: 0;
+    left: 0;
+    position: fixed !important;
+}
+
+.splash {
+    /* absolute center .splash within .splash-container */
+    width: 80%;
+    height: 50%;
+    margin: auto;
+    position: absolute;
+    top: 10px; left: 0; bottom: 0; right: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* This is the main heading that appears on the blue section */
+.splash h1 {
+    text-align: center;
+    width: 60%;
+    margin: 0rem auto;
+    line-height: 10rem;
+    border: solid 5px white;
+    border-radius: .5rem;
+    font-size: 3rem;
+    color: white;
+    letter-spacing: 0.1em;
+}
+
+.splash h1 + div {
+    text-align: center;
+    width: 60%;
+    margin: 6rem auto;
+    color: white;
+
+    display: flex;
+}
+.splash h1 + div > a {
+    display: block;
+    flex: 48%;
+    background: white;
+    border-radius: .5rem;
+    padding: 1rem 1rem;
+    font-size: 1.5rem;
+    color: #ff4040;
+    text-decoration: none;
+    font-weight: bold;
+}
+.splash h1 + div > a:first-child {
+    margin-right: 2%;
+}
+
+.splash div:last-child {
+    text-align: center;
+    width: 60%;
+    margin: 4rem auto;
+    color: white;
+}
+
+/*
+ * -- CONTENT STYLES --
+ * This represents the content area (everything below the blue section)
+ */
+.content-wrapper {
+    /* These styles are required for the "scroll-over" effect */
+    position: absolute;
+    top: 80%;
+    width: 100%;
+    min-height: 100%;
+    z-index: 2;
+    background: white;
+}
+
+/* This is the class used for the main content headers (<h2>) */
+.content h2 {
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 3em auto 2rem auto;
+    text-align: center;
+    width: 50%;
+}
+
+
+.content p,
+.content h3 {
+    font-weight: 400;
+    text-align: left;
+    width: 50%;
+    margin: 1rem auto;
+}
+.content h3 {
+    margin: 2rem auto 1rem auto;
+}

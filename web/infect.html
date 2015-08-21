@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The VIRUS!!</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/virus.css" type="text/css" />
+    </head>
+    <body>
+        <div id='menu'>
+            <span>Infect the world!</span>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="conway.html">Conway's Game</a></li>
+            </ul>
+        </div>
+        <div id="map">
+            <div id="counter-bar">Days: 0</div>
+            <table title="field" id="virus"></table>
+        </div>
+        <div id="hotbar">
+            <div>
+                <button id="start">Infect the world</button>
+                <h2>TEST</h2>
+                <select id="ready-test" name="ready-test">
+                    <option value="-1">Make your own</option>
+                </select>
+                <div id="test">
+                    <table title="test" id="test-table">
+                    </table>
+                </div>
+                <div id="infected-bar">0%</div>
+                <p>Infected</p>
+            </div>
+        </div>
+        <div id="message"></div>
+        <script type="text/javascript">
+            
+            window.virus = {};
+            
+            ;(function(d, virus){
+                
+                var test;
+                
+                function init() {
+                    
+                }
+                
+                d.addEventListener("DOMContentLoaded", function() {
+                    var testArea = document.getElementById("test");
+                    var testTable = document.getElementById("test-table");
+                    var size = virus.calcVirusSize(testArea); 
+                    test = {
+                        ns: "test",
+                        size: size,
+                        virions: virus.initVirions(size.x,size.y),
+                        infected: 0,
+                        age: 0
+                    };
+                    var setVirion = function (x,y) {
+                       var td = d.getElementById("test_"+y+"x"+x);
+                        if (td.getAttribute("alt") === "1") {
+                            td.setAttribute("alt", 0);
+                            test.virions[y][x] = 0;
+                        } else {
+                            td.setAttribute("alt", 1);
+                            test.virions[y][x] = 1;
+                        }
+                    }
+                    virus.renderMap(testTable,test,"test", setVirion);
+                   
+                    // render patterns list
+                    var rt = d.getElementById("ready-test");
+                    rt.addEventListener("change", function (e) {
+                        test = {
+                            ns: "test",
+                            size: size,
+                            virions: virus.initVirions(size.x,size.y),
+                            infected: 0,
+                            age: 0
+                        };
+                        virus.renderMap(testTable,test,"test",setVirion);
+                        if(e.target.selectedIndex !== 0) {
+                            test = virus.deploy(test,virus.patterns[rt.options[e.target.selectedIndex].value].virions);
+                            virus.renderVirus(testTable,test,"test");
+                        }
+                    })
+                    var option;
+                    for(var i=0;i<virus.patterns.length;i++) {
+                        option = d.createElement("option");
+                        option.setAttribute("value",i);
+                        option.innerHTML = virus.patterns[i].name;
+                        rt.appendChild(option);
+                    }
+                   
+                });
+                
+                d.getElementById("start").addEventListener("click", function() {
+                    if (virus.interval) {
+                        clearInterval(virus.interval);
+                    }
+                    //The table for the way you see the virus on the screen
+                    var map = d.getElementById("map");
+                    virus.init(map, {
+                        //This is the amount of day over the deployment of a new virus
+                        NEWDEPLOYMENT: 100000000000000000000,
+                        //This is how much of the world is infected in % 
+                        MAXINFECTED: 100,
+                        //Maximum number of user medpacks
+                        MAXMEDPACKS: 10
+                    });
+                    //console.log(test);
+                    virus = virus.deploy(virus, test.virions, parseInt( virus.size.x / 2 ), parseInt(virus.size.y /2));
+                    var history = [];
+                    virus.interval = setInterval(function () {
+                        for(var i=0;i<history.length;i++) {
+                            if(history[i] == virus.virions.toString()) {
+                                clearInterval(virus.interval);
+                                var evt = new CustomEvent("GameFinished", {
+                                    detail: "<div>Game Over!<br/>You only infected "+parseInt(virus.infected * 100) / 100+"% of the world.</div>"
+                                });
+                                d.dispatchEvent(evt);
+                                return;
+                            }
+                        }
+                        if(history.length < 10) {
+                            history.push(virus.virions.toString());
+                        } else {
+                            history.shift();
+                            history.push(virus.virions.toString());
+                        }
+                        virus.infect();
+                    }, 100);
+                });
+                
+                d.addEventListener("VirusCreated", function(e) {
+                    virus.renderMap(d.getElementById("virus"),e.detail,e.detail.ns, function(){} );
+                });
+                d.addEventListener("VirusDeployed", function(e) {
+                    virus.renderVirus(d.getElementById("virus"),e.detail,e.detail.ns);
+                    virus.renderInfectedCounter(d.getElementById("infected-bar"), e.detail);
+                    virus.renderSurvivedDays(d.getElementById("counter-bar"),e.detail);
+                });
+                d.addEventListener("NextStrain", function(e) {
+                    virus.renderVirus(d.getElementById("virus"),e.detail,e.detail.ns);
+                    virus.renderInfectedCounter(d.getElementById("infected-bar"),e.detail);
+                    virus.renderSurvivedDays(d.getElementById("counter-bar"),e.detail);
+                });
+                d.addEventListener("GameFinished", function(e) {
+                    virus.renderMessage(d.getElementById("message"),e.detail);
+                });
+                
+            }(document, window.virus));
+            
+        </script>
+        <script type="text/javascript" src="js/conf.js">;</script>
+        <script type="text/javascript" src="js/virus.js">;</script>
+    </body>
+</html>

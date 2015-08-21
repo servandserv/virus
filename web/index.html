@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>
-        </title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="keywords" content="Game Virus Virion Conway's Life" />
-        <meta name="author" content="Yan Kolpakov" />
-        <meta name="description" content="Conway's Life game implementation" />
+        <title>The VIRUS!!</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/virus.css" type="text/css" />
+        <style type="text/css">
+            #menu {
+                position: fixed;
+                z-index: 3;
+                width: 100%;
+            }
+        </style>
     </head>
     <body>
+        <div id='menu'>
+            <span>The Virus</span>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="conway.html">Conway's Game</a></li>
+            </ul>
+        </div>
+        <div id="intro">
+            <div class="splash-container">
+                <div class="splash">
+                    <h1>The Virus</h1>
+                    <div>
+                        <a href="save.html">Destroy The Virus</a>
+                        <a href="infect.html">Infect The World</a>
+                    </div>
+                </div>
+            </div>
+            <div class="content-wrapper">
+                <div class="content">
+                    <h2>How to play</h2>
+                    <h3>Destroy the virus</h3>
+                    <p>
+                        In this game mode you have got to try and destroy waves of viruses the way you start
+                        the game is press the deploy the virus button a random virus will appear somewhere on 
+                        the map. At the start of the game you get ten medpacks when you deploy the virus you 
+                        need to try and destroy it so it doesn't spread but that almost impossible to do.
+                    </p>
+                    <p>
+                        If the virus infects 50% of the world then you lose the game the point is the 
+                        game has a counter of days so you have got to try and make the virus take over 
+                        slowly so the longer you survive the better we will put in a feature so you can 
+                        put up your scores on to the internet.
+                    </p>
+                    <h3>Infect the world</h3>
+                    <p>
+                        In this mode you have to try and infect the world but only with one virus and the game 
+                        only stops when you get to hundred % so it's the  perfect mode for getting highscores 
+                        and checking out new viruses. 
+                    </p>
+                    <p>
+                        To start the game fist you have got to either choose a 
+                        virus from the ones we made or make your own (we will add more viruses overtime). 
+                    </p>
+                    <p>    
+                        We will add a posting feature so you can post your score online.
+                    </p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
