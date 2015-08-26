@@ -151,7 +151,13 @@
         //if the dose of the infected is more than the setup amount the we stop the game
         if (virus.MAXINFECTED < virus.infected && virus.interval) {
             clearInterval(virus.interval);
-            var evt = new CustomEvent("GameFinished", {detail: "<div>Game Over!<br/>World survived " + virus.age + " days.<br/> More then 50% territory infected.</div>"});
+            var evt = new CustomEvent("GameFinished", {
+                detail: {
+                    html: "<div>Game Over!<br/>World survived " + virus.age + " days.<br/> More then 50% territory infected.</div>",
+                    description: "World survived " + virus.age + " days. More then 50% territory infected.",
+                    caption: "Destroy the virus mode results"
+                }
+            });
             d.dispatchEvent(evt);
         }
     };
@@ -244,8 +250,29 @@
     };
 
     virus.renderMessage = function (view, msg) {
-        view.innerHTML = msg;
+        view.innerHTML = msg.html+"<div><button id='feed-button'>Share on Facebook</button></div>";
         view.style.display = "flex";
+        
+        d.getElementById("feed-button").addEventListener("click", function() {
+            FB.ui(
+            {
+                method: 'feed',
+                name: 'The Virus',
+                link: 'http://www.battleship.ru/virus',
+                picture: 'http://www.battleship.ru/virus/images/biohazzard.png',
+                caption: msg.caption,
+                description: msg.description
+            },
+            function(response) {
+                if (response && response.post_id) {
+                    alert('Post was published.');
+                } else {
+                    alert('Post was not published.');
+                }
+            });
+        });
+        
+        
         setTimeout(function () {
             view.style.display = "none";
         }, 5000);

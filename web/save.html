@@ -5,6 +5,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/virus.css" type="text/css" />
+        <link rel="icon" type="image/png" href="images/biohazzard.png" /> 
     </head>
     <body>
         <div id='menu'>
@@ -93,5 +94,22 @@
         </script>
         <script type="text/javascript" src="js/conf.js">;</script>
         <script type="text/javascript" src="js/virus.js">;</script>
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '1464060017233877',
+                    xfbml      : true,
+                    version    : 'v2.4'
+               });
+            };
+                                                                  
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+       </script>
     </body>
 </html>

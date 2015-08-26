@@ -238,6 +238,17 @@ body {
     font-weight: 900;
 }
 
+#message button {
+    border: solid 2px white;
+    border-radius: .5rem;
+    opacity: 1;
+    background: #3b5998;
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
 /*
  * -- SPLASH STYLES --
  * This is the blue top section that appears on the page.
@@ -348,4 +359,10 @@ body {
 }
 .content h3 {
     margin: 2rem auto 1rem auto;
+}
+
+.copy {
+    position: absolute;
+    bottom:0;
+    left: 1rem;
 }
