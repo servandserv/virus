@@ -136,6 +136,32 @@ window.virus.patterns = [
             y: 4,
             square: 24
         }
+    },{
+        name: "Pentadecathlon",
+        virions: [
+            [1, 1, 1, 1, 1, 1,1,1,1,1]
+        ],
+        size: {
+            x: 6,
+            y: 4,
+            square: 24
+        }
+    }, {
+        name: "The Queen Bee shuttle",
+        virions: [
+            [1, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1],
+            [0, 0, 0, 1],
+            [0, 0, 0, 1],
+            [0, 0, 1, 0],
+            [1, 1, 0, 0]
+        ],
+        size: {
+            x: 4,
+            y: 7,
+            square: 28
+        }
     }, {
         name: "R-pentomino",
         virions: [
@@ -169,6 +195,6 @@ window.virus.patterns = [
 ];
 
 window.virus.tests = [
-    0, 1, 2, 3, 4, 5
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
 ];
 
