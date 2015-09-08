@@ -14,6 +14,32 @@
                 max-width: 800px;
                 background: white;
             }
+            
+            #biohazzard {
+                display: none;
+            }
+            
+            @media print {
+                body {
+                    display: block;
+                }
+                h1 {
+                    font-size: 3rem;
+                    text-align: center;
+                    margin-top: 5rem;
+                }
+                #biohazzard {
+                    width: 30%;
+                    height: 30%;
+                    display: block;
+                    margin: 5rem auto;
+                }
+                #menu {
+                    display: none;
+                }
+                h2 { page-break-before: always; }
+                a[href^=http]:after {content:" <" attr(href) ">";
+            }
         </style>
     </head>
     <body>
@@ -26,6 +52,7 @@
         </div>
         <div id="intro">
             <h1>Conway's game of Life</h1>
+            <img id="biohazzard" src="images/biohazzard.png" />
             <h2>What is the Game of Life?</h2>
             <p>The Game of Life (or simply Life) is not a game in the conventional 
             sense. There are no players, and no winning or losing. Once the "pieces" 
@@ -112,7 +139,8 @@
            <h2>Life Patterns</h2>
            <p>A good way to get started in Life is to try out different patterns and see 
               what happens. Even completely random starting patterns rapidly turn into 
-              Life objects recognizable to anyone with a little experience.</p>
+              Life objects recognizable to anyone with a little experience. (You need to go onto 
+              the mode "Infect the world" and choose make your own and try out different styles)</p>
            <p align="center" style="padding: 2rem 0;"><img src="http://www.conwaylife.com/w/images/6/6e/Rpentomino.png"></p>
            <p> The R-pentomino is the first pattern Conway found that defied his attempts 
             to simulate by hand. In fact, the pattern eventually becomes "stable" 
@@ -126,7 +154,7 @@
             <p>Some of the most common objects in Life remain the same from step to step. 
         No live cells die and no new cells are born. Conway, who is fond of making 
         puns, called this kind of object a "still life." You can observe several 
-        of these objects by running the R-pentomino in the applet. For an object 
+        of these objects by running the R-pentomino in the virus mode. For an object 
         to be a still life, every live cell most have 2 or 3 live neighbors, and 
         every dead cell may have any number of neighbors <em>except</em> 3. </p>
         <p> The most common still life is called the block. It is simply a 2x2 square 
